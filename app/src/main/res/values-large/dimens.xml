@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="textbuttonSize">20sp</dimen>
+    <dimen name="texttitre">48sp</dimen>
+    <dimen name="textbuttonliste">24sp</dimen>
+    <dimen name="listedossardsheight">600dp</dimen>
+    <dimen name="layoutMarginleftliste">200dp</dimen>
+    <dimen name="sizetextlistcsv">30sp</dimen>
+    <dimen name="creerunboiteheight">600dp</dimen>
+    <dimen name="cardheight">500dp</dimen>
+
+</resources>

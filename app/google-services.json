@@ -1,0 +1,249 @@
+{
+  "project_info": {
+    "project_number": "262145909852",
+    "firebase_url": "https://projetjulien-423d5.firebaseio.com",
+    "project_id": "projetjulien-423d5",
+    "storage_bucket": "projetjulien-423d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262145909852:android:fc2d2a15aa9651407e3299",
+        "android_client_info": {
+          "package_name": "fr.kunze.crossepsv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMCWqKr3PUfk4Kkc0d6j6KhzslcXbmV_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262145909852:android:5d3e1d41fb6dbe90",
+        "android_client_info": {
+          "package_name": "fr.kunze.acrosport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262145909852-psqvmns86ntoolaeh83fiffkqe650d4k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.kunze.acrosport",
+            "certificate_hash": "b41185a9421bc9aea43638b1a91d5faa249456f3"
+          }
+        },
+        {
+          "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMCWqKr3PUfk4Kkc0d6j6KhzslcXbmV_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3210562389831443~1030032415"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262145909852:android:fd2cdabcb7cc88da7e3299",
+        "android_client_info": {
+          "package_name": "fr.kunze.coscanneleve"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMCWqKr3PUfk4Kkc0d6j6KhzslcXbmV_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262145909852:android:13a9b527012d9ded7e3299",
+        "android_client_info": {
+          "package_name": "fr.kunze.coscanneps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMCWqKr3PUfk4Kkc0d6j6KhzslcXbmV_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262145909852:android:8595c7e2584465f5",
+        "android_client_info": {
+          "package_name": "fr.kunze.equipesequilibres"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262145909852-s82inudh488ep18o7fttdpeuvl9c1aaj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.kunze.equipesequilibres",
+            "certificate_hash": "b4a6d6615c973913192994de2f9254a4926b18bc"
+          }
+        },
+        {
+          "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMCWqKr3PUfk4Kkc0d6j6KhzslcXbmV_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262145909852:android:2dd10cd938d36258",
+        "android_client_info": {
+          "package_name": "fr.kunze.gestiondecross"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262145909852-tctunq0726u3hp34e7kac0dtog25b26d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.kunze.gestiondecross",
+            "certificate_hash": "1610c5f26f4a18d5754dbcdadcd65481bb7b9db4"
+          }
+        },
+        {
+          "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMCWqKr3PUfk4Kkc0d6j6KhzslcXbmV_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3210562389831443~3617545612"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262145909852:android:65f9c8c8649861b3",
+        "android_client_info": {
+          "package_name": "fr.kunze.videoeps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262145909852-q9ak4d2gvh01aito1qig4ne1olag64br.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.kunze.videoeps",
+            "certificate_hash": "5419b064fdc0eae6c977be18af3f459b8f74737f"
+          }
+        },
+        {
+          "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMCWqKr3PUfk4Kkc0d6j6KhzslcXbmV_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262145909852-62m6h2e1e004fmcec5nr9f1vmf4hg8vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3210562389831443~6651295614"
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.crossepsv2.MainActivity">
+    <item
+        android:id="@+id/aide"
+        android:icon="@android:drawable/ic_menu_help"
+        android:orderInCategory="100"
+        android:title="aide"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/creerDossard"
+        android:icon="@drawable/ic_action_qrcode"
+        android:title="Créer un ou plusieurs dossards"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/listeDossard"
+        android:icon="@drawable/ic_action_name"
+        android:title="Liste des dossards"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/go"
+        android:title="GO !"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/supprimerCourse"
+        android:title="Supprimer une course"
+        app:showAsAction="never" />
+</menu>

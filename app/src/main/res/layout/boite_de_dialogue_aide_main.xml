@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:padding="16dp"
+        android:text="Pour démarrer une nouvelle course, vous devez appuyer sur 'GO !'\n\nVous devez au préalable avoir préparé des dossards sur lesquelles il y aura un QR code ou un code barre.\nPlusieurs possibilités s'offrent à vous :\n\n1-Créer vos dossards un par un.\n\nCréer vos dossards à partir d'une liste.\n\nLors de la création de vos dossards,veillez à ce qu'ils aient tous des items identiques pour une même course. (Nom, Prénom, Classe, Catégorie,...).\n\nPour démarrer la course appuyez sur 'START', vous pourrez alors scanner vos dossards à chaque fois qu'un participant arrive en appuyant sur le bouton 'scanner'." />
+</LinearLayout>

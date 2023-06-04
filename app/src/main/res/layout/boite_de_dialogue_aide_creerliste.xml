@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp">
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Vous allez pouvoir générer un fichier PDF contenant vos dossards.\n\nPour créer une liste de dossards, importer une liste de participant au format CSV (vous pouvez en créer une avec excel).\nUne fois votre liste importée, vous pouvez ajouter ou supprimer un participant manuellement.\n\nCliquez sur 'Générer les dossards à partir de la liste' pour créer un fichier de dossards au format PDF dans le dossier /app_cross.\n\nLes fichiers PDF enregistrés sont disponibles directement dans l'application.\nIls peuvent être ouverts directement ou partager."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</RelativeLayout>

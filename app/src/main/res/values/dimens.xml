@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="textbuttonSize">14sp</dimen>
+    <dimen name="texttitre">24sp</dimen>
+    <dimen name="textbuttonliste">12sp</dimen>
+    <dimen name="listedossardsheight">300dp</dimen>
+    <dimen name="layoutMarginleftliste">16dp</dimen>
+    <dimen name="sizetextlistcsv">18sp</dimen>
+    <dimen name="creerunboiteheight">200dp</dimen>
+    <dimen name="cardheight">300dp</dimen>
+
+</resources>

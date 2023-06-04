@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/cardheight"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/cardview_shadow_start_color"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp"
+    tools:ignore="MissingClass">
+
+
+        <TextView
+            android:id="@+id/nomCourse"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_above="@id/listCoureur"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:background="@android:color/transparent"
+            android:gravity="center_horizontal"
+            android:text="Course"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="14sp" />
+
+        <ListView
+            android:id="@+id/listCoureur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/borderbouton"
+            android:clickable="false"
+            android:focusable="false"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+</androidx.cardview.widget.CardView>
