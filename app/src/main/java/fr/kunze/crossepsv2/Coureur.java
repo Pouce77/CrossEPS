@@ -6,7 +6,6 @@ package fr.kunze.crossepsv2;
 
 public class Coureur {
 
-
     String nom;
     int place;
     String temps;
@@ -20,8 +19,6 @@ public class Coureur {
         this.nomCourse=nomCourse;
 
     }
-
-
 
     public String getNom() {
         return nom;

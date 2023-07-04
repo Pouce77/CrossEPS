@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Accueil extends AppCompatActivity {
 
     ImageButton image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +21,6 @@ public class Accueil extends AppCompatActivity {
         Animation anim= AnimationUtils.loadAnimation(Accueil.this,R.anim.rotate);
         anim.setRepeatCount(4);
         image.setAnimation(anim);
-
 
       new Thread(() -> {
 

@@ -18,7 +18,6 @@ public class CoureurDAO {
     protected final static String NAME = "basecrosseps.db";
     protected SQLiteDatabase eDb = null;
     protected DBHelper eHandler = null;
-
     public static final String NOM_TABLE = "course";
     public static final String KEY = "_id";
     public static final String NOM_COURSE="nomCourse";

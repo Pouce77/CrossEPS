@@ -1,5 +1,0 @@
-class tets {
-}
-fun test(){
-
-}
