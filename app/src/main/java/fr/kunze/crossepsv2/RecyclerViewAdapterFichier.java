@@ -2,6 +2,8 @@ package fr.kunze.crossepsv2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -9,12 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
+import androidx.core.content.PackageManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerViewAdapterFichier extends RecyclerView.Adapter<RecyclerViewAdapterFichier.ViewHolder3> {
 
@@ -49,10 +54,10 @@ public class RecyclerViewAdapterFichier extends RecyclerView.Adapter<RecyclerVie
             public void onClick(View v) {
 
                 String fichier=holder.mTextView.getText().toString();
-                File folder=new File(Environment.getExternalStorageDirectory() +
+                File folder=new File(mContext.getApplicationContext().getFilesDir() +
                         File.separator + "app_cross");
                 File fi=new File(folder,fichier);
-                Uri uri= FileProvider.getUriForFile(mContext,"fr.kunze.crossepsv2.provider",fi);
+                Uri uri=FileProvider.getUriForFile(mContext,"fr.kunze.crossepsv2.provider",fi);
 
                 Intent j=new Intent(Intent.ACTION_VIEW);
                 j.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -61,9 +66,7 @@ public class RecyclerViewAdapterFichier extends RecyclerView.Adapter<RecyclerVie
                 }else{
                     j.setDataAndType(uri,"application/pdf");
                 }
-                mContext.startActivity(j);
-
-
+                    mContext.startActivity(j);
             }
         });
         holder.partager.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +74,7 @@ public class RecyclerViewAdapterFichier extends RecyclerView.Adapter<RecyclerVie
             public void onClick(View v) {
 
                 String fichier=holder.mTextView.getText().toString();
-                File folder=new File(Environment.getExternalStorageDirectory() +
+                File folder=new File(mContext.getApplicationContext().getFilesDir() +
                         File.separator + "app_cross");
                 File fi=new File(folder,fichier);
                 Uri uri= FileProvider.getUriForFile(mContext,"fr.kunze.crossepsv2.provider",fi);
@@ -118,6 +121,14 @@ public class RecyclerViewAdapterFichier extends RecyclerView.Adapter<RecyclerVie
 
         mItems.remove(position);
         notifyItemRemoved(position);
+    }
+
+    public static boolean isIntentAvailable(Context ctx, Intent intent) {
+        final PackageManager mgr = ctx.getPackageManager();
+        List<ResolveInfo> list =
+                mgr.queryIntentActivities(intent,
+                        PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
     }
 }
 

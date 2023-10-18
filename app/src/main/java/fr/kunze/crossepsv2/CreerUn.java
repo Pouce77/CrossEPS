@@ -1,17 +1,22 @@
 package fr.kunze.crossepsv2;
 
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -20,6 +25,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 
 import com.google.zxing.WriterException;
 
@@ -29,7 +35,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class CreerUn extends AppCompatActivity {
-
     EditText editnom;
     EditText editPrenom;
     EditText editClasse;
@@ -46,8 +51,9 @@ public class CreerUn extends AppCompatActivity {
     PdfDocument.PageInfo pageInfo;
     Rect contentRect;
 
+    CheckBox checkBox;
+    Bitmap logo;
     MyView myView;
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +70,7 @@ public class CreerUn extends AppCompatActivity {
         editAutre2=findViewById(R.id.editAutre2);
 
         generer=findViewById(R.id.buttonGenerer);
-
+        checkBox=findViewById(R.id.checkBoxUn);
 
         generer.setOnClickListener(v -> {
 
@@ -92,9 +98,38 @@ public class CreerUn extends AppCompatActivity {
             }else{
                 newChaine=chaine;
             }
+
             FrameLayout frameLayout=alertDialogView.findViewById(R.id.frame);
+
+            File folder = new File(getApplicationContext().getFilesDir() +
+                    File.separator + "app_cross");
+            if (!folder.exists()) {
+
+                folder.mkdir();
+            }
+
+            if (checkBox.isChecked()) {
+                ContentResolver contentResolver = alertDialogView.getContext().getContentResolver();
+
+                String[] files = folder.list();
+                boolean fileExist = false;
+                for (String file : files) {
+                    if (file.matches("logo.png")) {
+                        fileExist = true;
+                    }
+                }
+
+                if (fileExist) {
+                    Uri uri = FileProvider.getUriForFile(alertDialogView.getContext(), "fr.kunze.crossepsv2.provider", new File(getApplicationContext().getFilesDir() + "/app_cross/logo.png"));
+                    try {
+                        logo = MediaStore.Images.Media.getBitmap(contentResolver, uri);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
             try {
-                myView = new MyView(alertDialogView.getContext(),newChaine);
+                myView = new MyView(alertDialogView.getContext(),newChaine,logo);
             } catch (WriterException e) {
                 e.printStackTrace();
             }
@@ -110,8 +145,7 @@ public class CreerUn extends AppCompatActivity {
             PdfDocument.Page page=pdfDocument.startPage(pageInfo);
             myView.draw(page.getCanvas());
             pdfDocument.finishPage(page);
-                File folder= new File(getApplicationContext().getFilesDir()+
-                        File.separator + "app_cross");
+
                 if(!folder.exists()){
 
                     folder.mkdir();
@@ -143,16 +177,9 @@ public class CreerUn extends AppCompatActivity {
                     dialog.dismiss();
                 }
             });
-
             adb.show();
-
-
-
         });
-
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -186,14 +213,11 @@ public class CreerUn extends AppCompatActivity {
             adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
-
                 }
 
             });
-
             adb.show();
             return true;
-
         }
 
         if (id == R.id.home) {
@@ -214,6 +238,14 @@ public class CreerUn extends AppCompatActivity {
             finish();
             return true;
 
+        }
+        if (id == R.id.logo) {
+
+            Intent i=new Intent (CreerUn.this,Logo.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.slideright,R.anim.slideoutleft);
+
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

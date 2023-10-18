@@ -15,15 +15,12 @@ import java.util.List;
  */
 
 public class listCoureurAdapter extends ArrayAdapter<Coureur> {
-
     private LayoutInflater mInflater = null;
 
     public listCoureurAdapter(Context context, int resource, List<Coureur> objects) {
         super(context, resource, objects);
         mInflater = LayoutInflater.from(context);
     }
-
-
     @Override
     public Coureur getItem(int position) {
         return super.getItem(position);
@@ -38,7 +35,6 @@ public class listCoureurAdapter extends ArrayAdapter<Coureur> {
     public int getCount() {
         return super.getCount();
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

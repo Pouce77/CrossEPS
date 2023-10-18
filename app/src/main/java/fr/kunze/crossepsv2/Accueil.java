@@ -9,9 +9,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Accueil extends AppCompatActivity {
-
     ImageButton image;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +23,11 @@ public class Accueil extends AppCompatActivity {
       new Thread(() -> {
 
          try {
-              Thread.sleep(2000);
-
+          Thread.sleep(2000);
           Intent intent = new Intent(Accueil.this, MainActivity.class);
           startActivity(intent);
           overridePendingTransition(R.anim.slideright, R.anim.slideoutleft);
-              finish();
+          finish();
           }catch (InterruptedException ignored){}
 
       }).start();

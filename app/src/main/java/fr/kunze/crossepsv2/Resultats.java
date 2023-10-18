@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -15,6 +16,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +29,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,6 +66,8 @@ public class Resultats extends AppCompatActivity {
         SimpleAdapter eadapter = new SimpleAdapter(Resultats.this, e, R.layout.liste_item_perso, new String[]{"place", "nom"}, new int[]{R.id.textView3, R.id.textView4});
         listeResultats.setAdapter(eadapter);
 
+
+
     }
 
     @Override
@@ -83,100 +88,61 @@ public class Resultats extends AppCompatActivity {
 
         if (id == R.id.csvfile) {
 
-            if (ContextCompat.checkSelfPermission(Resultats.this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
+            if(android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
 
-                if (ActivityCompat.shouldShowRequestPermissionRationale(Resultats.this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    //Cela signifie que la permission à déjà était
-                    //demandé et l'utilisateur l'a refusé
-                    //Vous pouvez aussi expliquer à l'utilisateur pourquoi
-                    //cette permission est nécessaire et la redemander
-                    LayoutInflater factory = LayoutInflater.from(Resultats.this);
-                    final View alertDialogView = factory.inflate(R.layout.boite_de_dialogue_permission_ecrire, null);
+                if (ContextCompat.checkSelfPermission(Resultats.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
 
-                    //Création de l'AlertDialog
-                    final android.app.AlertDialog.Builder adb = new android.app.AlertDialog.Builder(Resultats.this);
+                    Log.e("PErmissison", "pas accordée");
 
-                    //On affecte la vue personnalisé que l'on a crée à notre AlertDialog
-                    adb.setView(alertDialogView);
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(Resultats.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        //Cela signifie que la permission à déjà était
+                        //demandé et l'utilisateur l'a refusé
+                        //Vous pouvez aussi expliquer à l'utilisateur pourquoi
+                        //cette permission est nécessaire et la redemander
+                        LayoutInflater factory = LayoutInflater.from(Resultats.this);
+                        final View alertDialogView = factory.inflate(R.layout.boite_de_dialogue_permission_ecrire, null);
+                        //Création de l'AlertDialog
+                        final android.app.AlertDialog.Builder adb = new android.app.AlertDialog.Builder(Resultats.this);
+                        //On affecte la vue personnalisé que l'on a crée à notre AlertDialog
+                        adb.setView(alertDialogView);
+                        //On donne un titre à l'AlertDialog
+                        adb.setTitle("Permission");
+                        //On affecte un bouton "OK" à notre AlertDialog et on lui affecte un évènement
+                        adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    //On donne un titre à l'AlertDialog
-                    adb.setTitle("Permission");
+                                ActivityCompat.requestPermissions(Resultats.this,
+                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        MY_PERMISSIONS_REQUEST_WRITE);
 
-                    //On affecte un bouton "OK" à notre AlertDialog et on lui affecte un évènement
-                    adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        //On crée un bouton "Annuler" à notre AlertDialog et on lui affecte un évènement
+                        adb.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Lorsque l'on cliquera sur annuler on quittera l'application
+                                dialog.dismiss();
+                            }
+                        });
+                        adb.show();
 
-                            ActivityCompat.requestPermissions(Resultats.this,
-                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                    MY_PERMISSIONS_REQUEST_WRITE);
-
-                        }
-
-                    });
-
-                    //On crée un bouton "Annuler" à notre AlertDialog et on lui affecte un évènement
-                    adb.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            //Lorsque l'on cliquera sur annuler on quittera l'application
-
-                            dialog.dismiss();
-                        }
-                    });
-                    adb.show();
-
+                    } else {
+                        //Sinon demander la permission
+                        ActivityCompat.requestPermissions(Resultats.this,
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                MY_PERMISSIONS_REQUEST_WRITE);
+                    }
                 } else {
-                    //Sinon demander la permission
-                    ActivityCompat.requestPermissions(Resultats.this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            MY_PERMISSIONS_REQUEST_WRITE);
+                    Log.e("Permission déjà accordé","Déjà accordée");
+                    openDialogBox();
                 }
-            }else {
-                LayoutInflater factory = LayoutInflater.from(Resultats.this);
-                final View alertDialogView = factory.inflate(R.layout.boite_de_dialogue_ecrire_csv, null);
-
-                //Création de l'AlertDialog
-                final AlertDialog.Builder adb = new AlertDialog.Builder(Resultats.this);
-
-                //On affecte la vue personnalisé que l'on a crée à notre AlertDialog
-                adb.setView(alertDialogView);
-
-                //On donne un titre à l'AlertDialog
-                adb.setTitle("Créer un fichier au format CSV");
-
-                //On affecte un bouton "OK" à notre AlertDialog et on lui affecte un évènement
-                adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Cursor c=basecourse.getCursorResultatCourse(nomCourse);
-                        String data="";
-                        while(c.moveToNext()){
-                            String chaine=c.getString(1).replace(" ",";");
-                            data=data+"\n"+c.getString(0)+";"+chaine+";"+(c.getString(2));
-                        }
-                        String timeStamp = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-                        String filname=nomCourse+"_"+timeStamp+".csv";
-                        ecrireDansCSV(data,filname);
-
-                        Toast.makeText(Resultats.this,"Course enregistrée dans le dossier : app_cross/"+filname,Toast.LENGTH_LONG).show();
-                    }
-
-                });
-
-                //On crée un bouton "Annuler" à notre AlertDialog et on lui affecte un évènement
-                adb.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-                    }
-                });
-
-                adb.show();
-
+            }else{
+                Log.e("Build.version","Tiramisu");
+                openDialogBox();
             }
-
             return true;
         }
 
@@ -184,25 +150,18 @@ public class Resultats extends AppCompatActivity {
 
             LayoutInflater factory = LayoutInflater.from(Resultats.this);
             final View alertDialogView = factory.inflate(R.layout.boite_de_dialogue_aide_resultats, null);
-
             //Création de l'AlertDialog
             final AlertDialog.Builder adb = new AlertDialog.Builder(Resultats.this);
-
             //On affecte la vue personnalisé que l'on a crée à notre AlertDialog
             adb.setView(alertDialogView);
-
             //On donne un titre à l'AlertDialog
             adb.setTitle("Aide");
-
             //On affecte un bouton "OK" à notre AlertDialog et on lui affecte un évènement
             adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-
                     dialog.dismiss();
                 }
-
             });
-
             adb.show();
 
             return true;
@@ -233,7 +192,7 @@ public class Resultats extends AppCompatActivity {
 
     public void ecrireDansCSV(String data, String filename) {
 
-        File folder= new File(Environment.getExternalStorageDirectory() +
+        File folder= new File(getApplicationContext().getFilesDir() +
                 File.separator + "app_cross");
         if(!folder.exists()){
 
@@ -261,59 +220,58 @@ public class Resultats extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[],
                                            int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_WRITE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // La permission est garantie
-                    LayoutInflater factory = LayoutInflater.from(Resultats.this);
-                    final View alertDialogView = factory.inflate(R.layout.boite_de_dialogue_ecrire_csv, null);
-
-                    //Création de l'AlertDialog
-                    final AlertDialog.Builder adb = new AlertDialog.Builder(Resultats.this);
-
-                    //On affecte la vue personnalisé que l'on a crée à notre AlertDialog
-                    adb.setView(alertDialogView);
-
-                    //On donne un titre à l'AlertDialog
-                    adb.setTitle("Créer un fichier au format CSV");
-
-                    //On affecte un bouton "OK" à notre AlertDialog et on lui affecte un évènement
-                    adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Cursor c=basecourse.getCursorResultatCourse(nomCourse);
-                            String data="";
-                            while(c.moveToNext()){
-                                String chaine=c.getString(1).replace(" ",";");
-                                data=data+"\n"+c.getString(0)+";"+c.getString(1)+";"+(c.getString(2));
-                            }
-                            String timeStamp = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-                            String filname=nomCourse+"_"+timeStamp+".csv";
-                            ecrireDansCSV(data,filname);
-
-                            Toast.makeText(Resultats.this,"Course enregistrée dans le dossier : app_cross/"+filname,Toast.LENGTH_LONG).show();
-                        }
-
-                    });
-
-                    //On crée un bouton "Annuler" à notre AlertDialog et on lui affecte un évènement
-                    adb.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            dialog.dismiss();
-                        }
-                    });
-
-                    adb.show();
-
+                    Log.e("Permisssion", "accordée");
+                    openDialogBox();
                 } else {
                     // La permission est refusée
                     Toast.makeText(Resultats.this, "Vous avez refusé la permission d'écrire sur l'appareil.", Toast.LENGTH_LONG).show();
                 }
-                return;
             }
         }
+    }
+
+    public void openDialogBox (){
+
+        LayoutInflater factory = LayoutInflater.from(Resultats.this);
+        final View alertDialogView = factory.inflate(R.layout.boite_de_dialogue_ecrire_csv, null);
+        //Création de l'AlertDialog
+        final AlertDialog.Builder adb = new AlertDialog.Builder(Resultats.this);
+        //On affecte la vue personnalisé que l'on a crée à notre AlertDialog
+        adb.setView(alertDialogView);
+        //On donne un titre à l'AlertDialog
+        adb.setTitle("Créer un fichier au format CSV");
+        //On affecte un bouton "OK" à notre AlertDialog et on lui affecte un évènement
+        adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                Cursor c = basecourse.getCursorResultatCourse(nomCourse);
+                String data = "";
+                while (c.moveToNext()) {
+                    String chaine = c.getString(1).replace(" ", " ");
+                    data = data + c.getString(0) + ";" + chaine + ";" + (c.getString(2)) + "\n";
+                }
+                String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
+                String filname = nomCourse + "_" + timeStamp + ".csv";
+                Log.e("data", data);
+                ecrireDansCSV(data, filname);
+
+                Toast.makeText(Resultats.this, "Course enregistrée dans le fichier " + filname, Toast.LENGTH_LONG).show();
+            }
+        });
+        //On crée un bouton "Annuler" à notre AlertDialog et on lui affecte un évènement
+        adb.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+        adb.show();
     }
 
 }

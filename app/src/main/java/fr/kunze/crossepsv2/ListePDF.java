@@ -101,7 +101,7 @@ public class ListePDF extends AppCompatActivity {
                         PrintManager printManager=(PrintManager) ListePDF.this.getSystemService(Context.PRINT_SERVICE);
                         try
                         {
-                            File folder= new File(Environment.getExternalStorageDirectory() +
+                            File folder= new File(getApplicationContext().getFilesDir() +
                                     File.separator + "app_cross"+File.separator+spinner.getSelectedItem().toString());
                             PrintDocumentAdapter printAdapter = new PdfDocumentAdapter(ListePDF.this,folder.getAbsolutePath());
 
@@ -158,7 +158,7 @@ public class ListePDF extends AppCompatActivity {
                         if (arrayList.isEmpty()){
                             Toast.makeText(alertDialogView.getContext(),"Il n'y a pas de fichier à supprimer.",Toast.LENGTH_LONG).show();
                         }else {
-                            File folder = new File(Environment.getExternalStorageDirectory() +
+                            File folder = new File(getApplicationContext().getFilesDir() +
                                     File.separator + "app_cross" + File.separator + spinner.getSelectedItem().toString());
                             folder.delete();
                             arrayList.remove(spinner.getSelectedItem().toString());

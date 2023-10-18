@@ -10,10 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class CreerDossard extends AppCompatActivity {
-
     Button creerUn;
     Button creerListe;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +39,6 @@ public class CreerDossard extends AppCompatActivity {
             finish();
 
         });
-
-
     }
 
     @Override

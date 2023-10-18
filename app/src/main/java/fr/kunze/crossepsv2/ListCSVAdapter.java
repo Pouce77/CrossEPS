@@ -62,7 +62,7 @@ public class ListCSVAdapter extends ArrayAdapter<String> {
                 public void onClick(View v) {
 
                     String fichier=holder.nomFichier.getText().toString();
-                    File folder=new File(Environment.getExternalStorageDirectory() +
+                    File folder=new File( getContext().getApplicationContext().getFilesDir()+
                             File.separator + "app_cross");
                     File fi=new File(folder,fichier);
                     Uri uri= FileProvider.getUriForFile(getContext(),"fr.kunze.crossepsv2.provider",fi);

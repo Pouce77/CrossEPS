@@ -1,16 +1,19 @@
 package fr.kunze.crossepsv2;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.graphics.Rect;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,9 +32,9 @@ public class TacheDeFond extends AsyncTask <ArrayList<String>,Integer,Void>{
     PdfDocument.PageInfo pageInfo;
     ProgressDialog progressBar;
     int tour;
+    Bitmap logo;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public TacheDeFond(ArrayList<String> arrayList, Context context , String nomFichier) {
+    public TacheDeFond(ArrayList<String> arrayList,Bitmap logo,Context context , String nomFichier) {
 
         this.arrayList = arrayList;
         this.context = context;
@@ -41,12 +44,14 @@ public class TacheDeFond extends AsyncTask <ArrayList<String>,Integer,Void>{
         pageInfo=new PdfDocument.PageInfo.Builder(595,842,1).setContentRect(contentRect).create();
         this.tour = 0;
         this.nbrePage = arrayList.size() / 2;
-
+        this.logo=logo;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
+    @SafeVarargs
     @Override
-    protected Void doInBackground(ArrayList<String>... arrayLists) {
+    protected final Void doInBackground(ArrayList<String>... arrayLists) {
+
 
         ArrayList<String> arrayList1=arrayLists[0];
         for (tour=0;tour<arrayList1.size();tour=tour+2){
@@ -56,15 +61,14 @@ public class TacheDeFond extends AsyncTask <ArrayList<String>,Integer,Void>{
             if (tour+1<arrayList1.size()){
             nom2=arrayList1.get(tour+1);
             }
-            MyViewListe myViewListe=new MyViewListe(context,nom1,nom2);
+            MyViewListe myViewListe=new MyViewListe(context,nom1,nom2,logo);
             myViewListe.draw(page.getCanvas());
             document.finishPage(page);
             publishProgress(tour);
 
         }
 
-        File folder= new File(Environment.getExternalStorageDirectory() +
-                File.separator + "app_cross");
+        File folder= new File(context.getApplicationContext().getFilesDir()+ File.separator +"app_cross");
         if(!folder.exists()){
 
             folder.mkdir();
@@ -127,7 +131,7 @@ public class TacheDeFond extends AsyncTask <ArrayList<String>,Integer,Void>{
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        Toast.makeText(context,"Vous avez créer le fichier : "+this.nomFichier+".pdf dans le dossier app_cross !",Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"Vous avez créer le fichier : "+this.nomFichier+".pdf !",Toast.LENGTH_LONG).show();
         progressBar.dismiss();
     }
 

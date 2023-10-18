@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +38,6 @@ public class ListeCSV extends AppCompatActivity {
 
         File folder= new File(getApplicationContext().getFilesDir() +
                 File.separator + "app_cross");
-
         File[]file=folder.listFiles();
 
         if (file!=null){

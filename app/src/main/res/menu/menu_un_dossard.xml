@@ -13,6 +13,11 @@
         android:title="Liste des fichiers PDF créés"
         app:showAsAction="always" />
     <item
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="ajouter un logo à vos dossards" />
+    <item
         android:id="@+id/aide"
         android:icon="@android:drawable/ic_menu_help"
         android:title="Aide"

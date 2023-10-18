@@ -1,5 +1,6 @@
 package fr.kunze.crossepsv2;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,8 +16,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 public class MyViewListe extends View {
-
     public static final int QRcodeWidth = 250;
+    public static final int QRcodeHeight = 250;
     Bitmap b1;
     Bitmap b2;
     String chaineNom1;
@@ -25,23 +26,29 @@ public class MyViewListe extends View {
     Rect rect1;
     Rect rect2;
     TextPaint textPaint;
-
+    Bitmap logo;
 
     public MyViewListe(Context context) {
         super(context);
     }
 
-    public MyViewListe(Context context,String chaineNom1,String chaineNom2){
+    public MyViewListe(Context context,String chaineNom1,String chaineNom2,Bitmap logo){
         super(context);
         this.chaineNom1=chaineNom1;
         this.chaineNom2=chaineNom2;
+        this.logo=logo;
 
-        try {
-            b1=TextToImageEncode(this.chaineNom1);
-        } catch (WriterException e) {
-            e.printStackTrace();
+        if(this.chaineNom1.matches("")){
+
+        }else {
+            try {
+                b1 = TextToImageEncode(this.chaineNom1);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
         }
-        if (this.chaineNom2.matches("")){
+
+        if(this.chaineNom2.matches("")){
 
         }else {
             try {
@@ -62,13 +69,13 @@ public class MyViewListe extends View {
         this.textPaint.setTypeface(var8);
         this.setMinimumWidth(600);
         this.setMinimumHeight(600);
-
 }
-
     @Override
     protected void onDraw(Canvas canvas) {
 
         canvas.drawRect(this.rect1, this.paint);
+        canvas.drawRect(this.rect2, this.paint);
+
         String[] var2 = this.chaineNom1.split(" ");
         byte var3 = 0;
         float var4 = 100.0F;
@@ -87,13 +94,18 @@ public class MyViewListe extends View {
             var4 += 20.0F;
         }
 
-        canvas.drawBitmap(this.b1, 20.0F, 30.0F, this.paint);
+        if(b1!=null) {
+            canvas.drawBitmap(this.b1, 20.0F, 30.0F, this.paint);
+        }
         Bitmap var6 = this.b2;
         if (var6 != null) {
             canvas.drawBitmap(var6, 20.0F, 400.0F, this.paint);
-            canvas.drawRect(this.rect2, this.paint);
         }
-
+        if(logo!=null){
+            Bitmap resizedLogo = Bitmap.createScaledBitmap(logo, 50, 50, true);
+            canvas.drawBitmap(resizedLogo, 470, 30, this.paint);
+            canvas.drawBitmap(resizedLogo, 470, 400, this.paint);
+        }
 
         super.onDraw(canvas);
     }
@@ -110,8 +122,8 @@ public class MyViewListe extends View {
         try {
             bitMatrix = new MultiFormatWriter().encode(
                     Value,
-                    BarcodeFormat.DATA_MATRIX.QR_CODE,
-                    QRcodeWidth, QRcodeWidth, null
+                    BarcodeFormat.QR_CODE,
+                    QRcodeWidth, QRcodeHeight, null
             );
 
         } catch (IllegalArgumentException Illegalargumentexception) {

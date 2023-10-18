@@ -21,20 +21,24 @@ public class MyView extends View {
     Paint paint;
     TextPaint textPaint;
     Rect rect;
+
+    Bitmap logo;
     public final static int QRcodeWidth = 300 ;
+    public final static int QRcodeHeight = 300 ;
 
     public MyView(Context context) {
         super(context);
     }
 
-    public MyView(Context context,String chaine) throws WriterException {
+    public MyView(Context context,String chaine,Bitmap logo) throws WriterException {
         super(context);
         this.chaine=chaine;
+        this.logo=logo;
 
         bitmap=TextToImageEncode(this.chaine);
         paint=new Paint();
         textPaint=new TextPaint();
-        rect=new Rect(10,10,500,360);
+        rect=new Rect(10,10,530,360);
         paint.setStrokeWidth(3);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(getResources().getColor(android.R.color.black));
@@ -64,7 +68,10 @@ public class MyView extends View {
         canvas.drawRect(rect,paint);
 
         canvas.drawBitmap(bitmap,20,20,paint);
-
+        if(logo!=null) {
+            Bitmap resizedLogo = Bitmap.createScaledBitmap(logo, 50, 50, true);
+            canvas.drawBitmap(resizedLogo, 470, 30, this.paint);
+        }
 
     }
 
@@ -80,8 +87,8 @@ public class MyView extends View {
         try {
             bitMatrix = new MultiFormatWriter().encode(
                     Value,
-                    BarcodeFormat.DATA_MATRIX.QR_CODE,
-                    QRcodeWidth, QRcodeWidth, null
+                    BarcodeFormat.QR_CODE,
+                    QRcodeWidth, QRcodeHeight, null
             );
 
         } catch (IllegalArgumentException Illegalargumentexception) {

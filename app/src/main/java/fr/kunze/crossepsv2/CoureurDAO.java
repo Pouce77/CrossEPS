@@ -13,36 +13,29 @@ import java.util.HashMap;
  */
 
 public class CoureurDAO {
-
     protected final static int VERSION = 1;
     protected final static String NAME = "basecrosseps.db";
     protected SQLiteDatabase eDb = null;
     protected DBHelper eHandler = null;
     public static final String NOM_TABLE = "course";
-    public static final String KEY = "_id";
     public static final String NOM_COURSE="nomCourse";
     public static final String PLACE="place";
     public static final String NOM_COUREUR="nom";
     public static final String TEMPS="temps";
 
-    public CoureurDAO(Context context) {
+    public static final String ID="_id";
 
+    public CoureurDAO(Context context) {
         eHandler=new DBHelper(context,NAME,null,VERSION);
     }
-
-
     public void openDb (){
-
         eDb=eHandler.getWritableDatabase();
-
     }
-
     public void closeDb (){
-
         eDb.close();
     }
 
-    public void ajoutCoureur(Coureur coureur){
+    public void addCoureur(Coureur coureur){
 
         ContentValues value=new ContentValues();
         value.put(NOM_COURSE,coureur.getNomCourse());
@@ -51,6 +44,15 @@ public class CoureurDAO {
         value.put(TEMPS,coureur.getTemps());
 
         eDb.insert(NOM_TABLE, null, value);
+    }
+
+    public void deleteCoureur(Coureur coureur){
+
+        eDb.delete(NOM_TABLE,NOM_COUREUR+"=?",new String[]{coureur.getNom()});
+
+        ContentValues value=new ContentValues();
+        value.put("PLACE",coureur.getPlace()+1);
+        eDb.execSQL("UPDATE "+NOM_TABLE+" SET place = (SELECT (COUNT(*) + 1) FROM (SELECT * from "+NOM_TABLE+") AS T1 WHERE  T1.place < course.place)");
     }
 
     public ArrayList<HashMap<String, String>> getListeCoureur(String nomCourse){
