@@ -174,6 +174,7 @@ public class CreerUn extends AppCompatActivity {
             adb.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
+                    logo=null;
                     dialog.dismiss();
                 }
             });
